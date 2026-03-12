@@ -1,11 +1,11 @@
 ---
 name: session-stocker
-description: Summarize useful knowledge from the current conversation and save it as a Markdown note in `/mnt/c/Users/t_ogawa/Documents/documents/12_Artifacts/`. Use this skill whenever the user asks to stock, archive, preserve, save, memoize, or record the current session, especially when they say phrases like `このセッションをストックして`, want a reusable note from the conversation, or ask to write a session summary into an artifacts folder.
+description: Summarize useful knowledge from the current conversation and save it as a Markdown note in the directory configured by `config.toml` (`artifacts.directory`, default: `/mnt/c/Users/t_ogawa/Documents/documents/12_Artifacts/`). Use this skill whenever the user asks to stock, archive, preserve, save, memoize, or record the current session, especially when they say phrases like `このセッションをストックして`, want a reusable note from the conversation, or ask to write a session summary into an artifacts folder.
 ---
 
 # Session Stock
 
-Turn the current session into a reusable Markdown artifact and save it to `/mnt/c/Users/t_ogawa/Documents/documents/12_Artifacts/`.
+Turn the current session into a reusable Markdown artifact and save it to the directory configured by `config.toml`.
 
 ## Goal
 
@@ -25,7 +25,10 @@ Typical triggers include:
 
 Create one Markdown file at:
 
-`/mnt/c/Users/t_ogawa/Documents/documents/12_Artifacts/<YYYYMMDD>_<session-summary>.md`
+`<artifacts-directory>/<YYYYMMDD>_<session-summary>.md`
+
+Resolve `<artifacts-directory>` from `config.toml` using `artifacts.directory`.
+If `artifacts.directory` is missing, fall back to `/mnt/c/Users/t_ogawa/Documents/documents/12_Artifacts/`.
 
 The file must contain these sections in this order:
 
@@ -98,10 +101,11 @@ If a category has no relevant items, write `- なし` instead of leaving the sec
 
 1. Review the current conversation and extract durable information.
 2. Generate the session summary.
-3. Ensure `/mnt/c/Users/t_ogawa/Documents/documents/12_Artifacts/` exists. Create it if necessary.
-4. Create the final Markdown content.
-5. Save the file using the required naming rule.
-6. Tell the user the saved path and briefly summarize what was captured.
+3. Read `config.toml` and resolve `artifacts.directory`.
+4. Ensure the resolved artifacts directory exists. Create it if necessary.
+5. Create the final Markdown content.
+6. Save the file using the required naming rule.
+7. Tell the user the saved path and briefly summarize what was captured.
 
 ## Quality bar
 
