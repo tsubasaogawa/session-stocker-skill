@@ -9,9 +9,6 @@ This skill turns an in-progress session into something you can revisit later. In
 The output directory is configured through `config.toml`.
 
 In this repository, the skill reads `artifacts.directory` from the root `config.toml`.
-If it is not set, the following default path is used:
-
-`/mnt/c/Users/t_ogawa/Documents/documents/12_Artifacts/`
 
 ```toml
 [artifacts]
