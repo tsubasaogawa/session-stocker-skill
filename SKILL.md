@@ -29,7 +29,7 @@ Create one Markdown file at:
 
 Resolve `<artifacts-directory>` from `config.toml` using `artifacts.directory`.
 
-The file must contain these sections in this order:
+The file must always contain these sections in this order:
 
 ```md
 # <session-summary>
@@ -37,8 +37,13 @@ The file must contain these sections in this order:
 ## 概要
 
 ## 知見
+```
 
+If the session includes one or more relevant URLs, append this optional section after `知見`:
+
+```md
 ## 参考情報
+- https://example.com/reference
 ```
 
 ## Writing guidance
@@ -85,16 +90,11 @@ Include:
 
 #### `参考情報`
 
-Record concrete references from the session that may be useful later.
+Record only relevant URLs from the session that may be useful later.
 
-Examples:
-- file paths
-- command names
-- tool names
-- issue or PR numbers
-- external URLs mentioned during the work
+Do not include file paths, command names, tool names, issue or PR numbers, or any other non-URL references.
 
-If a category has no relevant items, write `- なし` instead of leaving the section empty.
+If there are no relevant URLs, omit the entire `参考情報` section.
 
 ## Execution steps
 
@@ -102,7 +102,7 @@ If a category has no relevant items, write `- なし` instead of leaving the sec
 2. Generate the session summary.
 3. Read `config.toml` and resolve `artifacts.directory`.
 4. Ensure the resolved artifacts directory exists. Create it if necessary.
-5. Create the final Markdown content.
+5. Create the final Markdown content, adding `参考情報` only when relevant URLs were actually mentioned.
 6. Save the file using the required naming rule.
 7. Tell the user the saved path and briefly summarize what was captured.
 
@@ -113,4 +113,5 @@ Before saving, check that:
 - the filename matches the required pattern
 - the content is concise and useful later
 - the `知見` section contains real takeaways, not a transcript rewrite
-- the `参考情報` section contains concrete references or `- なし`
+- the `参考情報` section appears only when relevant URLs exist
+- when `参考情報` is present, it contains URLs only

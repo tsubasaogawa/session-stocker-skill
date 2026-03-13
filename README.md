@@ -56,7 +56,7 @@ Examples:
 
 ## Markdown output format
 
-The saved Markdown must include the following sections in this order:
+The saved Markdown must always include the following sections in this order:
 
 ```md
 # <session-summary>
@@ -64,8 +64,13 @@ The saved Markdown must include the following sections in this order:
 ## 概要
 
 ## 知見
+```
 
+If the session contains one or more relevant URLs, append this optional section after `知見`:
+
+```md
 ## 参考情報
+- https://example.com/reference
 ```
 
 ### Purpose of each section
@@ -87,17 +92,11 @@ Include:
 
 #### `参考情報`
 
-Record concrete references that may be useful later.
+Record only relevant URLs that may be useful later.
 
-Examples:
+Do not include file paths, command names, tool names, issue or PR numbers, or any other non-URL references.
 
-- file paths
-- command names
-- tool names
-- issue or PR numbers
-- URLs referenced during the work
-
-If there are no relevant items, write `- なし` instead of leaving the section empty.
+If there are no relevant URLs, omit the entire `参考情報` section.
 
 ## Execution flow
 
@@ -107,7 +106,7 @@ This skill follows the steps below:
 2. Decide on a short summary for the session
 3. Read `config.toml` and resolve `artifacts.directory`
 4. Ensure the resolved output directory exists
-5. Build the Markdown content in the required format
+5. Build the Markdown content in the required format, adding `参考情報` only when relevant URLs were mentioned
 6. Save the file using the required naming rule
 7. Tell the user the saved path and briefly summarize what was captured
 
@@ -119,7 +118,8 @@ Before saving, make sure at least the following are true:
 - the filename follows the required pattern
 - the content is concise and useful when revisited later
 - the `知見` section contains practical takeaways rather than a transcript rewrite
-- the `参考情報` section contains concrete references or `- なし`
+- the `参考情報` section appears only when relevant URLs exist
+- when `参考情報` is present, it contains URLs only
 
 ## Why this skill is useful
 
