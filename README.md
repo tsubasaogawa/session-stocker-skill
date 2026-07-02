@@ -1,3 +1,5 @@
+Skill moves to https://github.com/tsubasaogawa/skills
+
 # session-stocker-skill
 
 This skill extracts reusable knowledge from the current conversation and saves it as a Markdown note in an artifacts folder.
